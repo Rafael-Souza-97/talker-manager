@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getTalkerUsers } = require('./handleTalkerUsers');
+const { getTalkerUsers, tokenGenerate } = require('./handleTalkerUsers');
 
 const app = express();
 app.use(express.json());
@@ -33,6 +33,13 @@ app.get('/talker/:id', async (req, res) => {
   }
 
   return res.status(200).json(userId);
+});
+
+app.post('/login', (req, res) => {
+  const token = tokenGenerate();
+
+  return res.status(200)
+    .json({ token: `${token}` });
 });
 
 app.listen(PORT, () => {
