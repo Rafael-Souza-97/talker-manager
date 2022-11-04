@@ -1,13 +1,3 @@
-const { readFile } = require('fs').promises; 
-const path = require('path');
-
-const usersDb = path.resolve(__dirname, '.', 'talker.json');
-
-const getTalkerUsers = async () => {
-  const response = await readFile(usersDb, 'utf8');
-  return JSON.parse(response);
-};
-
 const tokenGenerate = () => {
   // Função adaptada de https://www.webtutorial.com.br/funcao-para-gerar-uma-string-aleatoria-random-com-caracteres-especificos-em-javascript/
 
@@ -20,6 +10,5 @@ const tokenGenerate = () => {
 };
 
 module.exports = {
-  getTalkerUsers,
   tokenGenerate,
 };

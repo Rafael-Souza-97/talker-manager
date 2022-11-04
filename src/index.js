@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { getTalkerUsers, tokenGenerate } = require('./handleTalkerUsers');
+const { validadeLoginEmail, validadeLoginPassword } = require('./Utils/loginValidation');
+const { getTalkerUsers } = require('./Utils/handleTalkerUsers');
+const { tokenGenerate } = require('./Utils/tokens');
 
 const app = express();
 app.use(express.json());
@@ -16,8 +18,8 @@ app.get('/', (_request, response) => {
 
 app.get('/talker', async (_req, res) => {
   const users = await getTalkerUsers();
-  if (users.length === 0) return res.status(200).json([]);
-  return res.status(200).json(users);
+  if (users.length === 0) return res.status(HTTP_OK_STATUS).json([]);
+  return res.status(HTTP_OK_STATUS).json(users);
 });
 
 app.get('/talker/:id', async (req, res) => {
@@ -32,13 +34,13 @@ app.get('/talker/:id', async (req, res) => {
     });
   }
 
-  return res.status(200).json(userId);
+  return res.status(HTTP_OK_STATUS).json(userId);
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', validadeLoginEmail, validadeLoginPassword, (_req, res) => {
   const token = tokenGenerate();
 
-  return res.status(200)
+  return res.status(HTTP_OK_STATUS)
     .json({ token: `${token}` });
 });
 
