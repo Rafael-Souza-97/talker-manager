@@ -18,7 +18,7 @@ app.get('/talker', async (_req, res) => {
   const users = await getTalkerUsers();
   if (users.length === 0) return res.status(200).json([]);
   return res.status(200).json(users);
-})
+});
 
 app.listen(PORT, () => {
   console.log('Online');
