@@ -10,6 +10,24 @@ const getTalkerUsers = async () => {
   return JSON.parse(response);
 };
 
+const updateTalkerUsers = async (id, body) => {
+  const { name, age, talk } = body;
+  const users = await getTalkerUsers();
+
+  let userId = users.find((user) => Number(user.id) === Number(id));
+  const removedIdUser = users.filter((user) => user !== userId);
+
+  userId = { name, age, id: Number(id), talk };
+
+  const update = [...removedIdUser, userId];
+
+
+  const newUser = JSON.stringify(update, null, 2);
+  await writeFile(usersDb, newUser);
+
+  return userId;
+}
+
 const addNewUser = async (name, age, talk) => {
   const users = await getTalkerUsers();
   const id = Number(users[users.length - 1].id) + 1;
@@ -101,7 +119,7 @@ const validateTalkerWatchedAt = (req, res, next) => {
 const validateTalkerRate = (req, res, next) => {
   const { rate } = req.body.talk;
 
-  if (!rate) {
+  if (rate === undefined) {
     return res.status(HTTP_CLIENT_ERROR_STATUS)
     .json({
       message: 'O campo "rate" é obrigatório',
@@ -120,6 +138,7 @@ const validateTalkerRate = (req, res, next) => {
 
 module.exports = {
   getTalkerUsers,
+  updateTalkerUsers,
   addNewUser,
   validateTalkerName,
   validateTalkerAge,

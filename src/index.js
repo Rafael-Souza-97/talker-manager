@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {
   getTalkerUsers,
+  updateTalkerUsers,
   addNewUser,
   validateTalkerName,
   validateTalkerAge,
@@ -60,6 +61,16 @@ app.post('/talker', tokenValidation, validateTalkerName, validateTalkerAge,
 
   return res.status(HTTP_CREATED_STATUS)
     .json(newUser);
+});
+
+app.put('/talker/:id', tokenValidation, validateTalkerName, validateTalkerAge,
+validateTalkerTalk, validateTalkerWatchedAt, validateTalkerRate, async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  
+  const a =  await updateTalkerUsers(id, body);
+
+  return res.status(HTTP_OK_STATUS).json(a);
 });
 
 app.listen(PORT, () => {
