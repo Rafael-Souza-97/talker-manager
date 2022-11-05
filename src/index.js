@@ -64,13 +64,13 @@ app.post('/talker', tokenValidation, validateTalkerName, validateTalkerAge,
 });
 
 app.put('/talker/:id', tokenValidation, validateTalkerName, validateTalkerAge,
-validateTalkerTalk, validateTalkerWatchedAt, validateTalkerRate, async (req, res) => {
+  validateTalkerTalk, validateTalkerWatchedAt, validateTalkerRate, async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const { body } = req;
   
-  const a =  await updateTalkerUsers(id, body);
+  const update = await updateTalkerUsers(id, body);
 
-  return res.status(HTTP_OK_STATUS).json(a);
+  return res.status(HTTP_OK_STATUS).json(update);
 });
 
 app.listen(PORT, () => {

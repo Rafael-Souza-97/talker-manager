@@ -21,12 +21,11 @@ const updateTalkerUsers = async (id, body) => {
 
   const update = [...removedIdUser, userId];
 
-
   const newUser = JSON.stringify(update, null, 2);
   await writeFile(usersDb, newUser);
 
   return userId;
-}
+};
 
 const addNewUser = async (name, age, talk) => {
   const users = await getTalkerUsers();
