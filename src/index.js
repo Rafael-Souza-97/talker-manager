@@ -1,14 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {
+  getTalkerUsers,
+  addNewUser,
+  validateTalkerName,
+  validateTalkerAge,
+  validateTalkerTalk,
+  validateTalkerWatchedAt,
+  validateTalkerRate,
+} = require('./Utils/handleTalkerUsers');
 const { validadeLoginEmail, validadeLoginPassword } = require('./Utils/loginValidation');
-const { getTalkerUsers } = require('./Utils/handleTalkerUsers');
-const { tokenGenerate } = require('./Utils/tokens');
+const { tokenGenerate, tokenValidation } = require('./Utils/tokens');
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
+const HTTP_CREATED_STATUS = 201;
 const PORT = '3000';
 
 // não remova esse endpoint, e para o avaliador funcionar
@@ -42,6 +51,15 @@ app.post('/login', validadeLoginEmail, validadeLoginPassword, (_req, res) => {
 
   return res.status(HTTP_OK_STATUS)
     .json({ token: `${token}` });
+});
+
+app.post('/talker', tokenValidation, validateTalkerName, validateTalkerAge,
+  validateTalkerTalk, validateTalkerWatchedAt, validateTalkerRate, async (req, res) => {
+  const { name, age, talk, watchedAt, rate } = req.body;
+  const newUser = await addNewUser(name, age, talk, watchedAt, rate);
+
+  return res.status(HTTP_CREATED_STATUS)
+    .json(newUser);
 });
 
 app.listen(PORT, () => {

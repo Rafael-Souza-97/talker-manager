@@ -1,6 +1,8 @@
 const HTTP_CLIENT_ERROR_STATUS = 400;
 
 const validadeLoginEmail = (req, res, next) => {
+  // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
+
   const { email } = req.body;
   
   if (!email) {
