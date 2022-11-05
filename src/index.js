@@ -4,6 +4,7 @@ const {
   getTalkerUsers,
   updateTalkerUsers,
   addNewUser,
+  deleteUser,
   validateTalkerName,
   validateTalkerAge,
   validateTalkerTalk,
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
 const HTTP_CREATED_STATUS = 201;
+const HTTP_DELETED_STATUS = 204;
 const PORT = '3000';
 
 // não remova esse endpoint, e para o avaliador funcionar
@@ -71,6 +73,14 @@ app.put('/talker/:id', tokenValidation, validateTalkerName, validateTalkerAge,
   const update = await updateTalkerUsers(id, body);
 
   return res.status(HTTP_OK_STATUS).json(update);
+});
+
+app.delete('/talker/:id', tokenValidation, async (req, res) => {
+  const { id } = req.params;
+  
+  await deleteUser(id);
+
+  return res.status(HTTP_DELETED_STATUS).json();
 });
 
 app.listen(PORT, () => {

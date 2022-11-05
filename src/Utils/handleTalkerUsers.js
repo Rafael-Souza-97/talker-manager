@@ -41,6 +41,16 @@ const addNewUser = async (name, age, talk) => {
   return { name, age, id, talk };
 };
 
+const deleteUser = async (id) => {
+  const users = await getTalkerUsers();
+  const removedIdUser = users.filter((user) => Number(user.id) !== Number(id));
+
+  const newDb = JSON.stringify(removedIdUser, null, 2);
+  await writeFile(usersDb, newDb);
+  
+  return removedIdUser;
+};
+
 const validateTalkerName = (req, res, next) => {
   const { name } = req.body;
 
@@ -139,6 +149,7 @@ module.exports = {
   getTalkerUsers,
   updateTalkerUsers,
   addNewUser,
+  deleteUser,
   validateTalkerName,
   validateTalkerAge,
   validateTalkerTalk,
