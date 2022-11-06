@@ -4,10 +4,24 @@ const path = require('path');
 const usersDb = path.resolve(__dirname, '..', 'talker.json');
 
 const HTTP_CLIENT_ERROR_STATUS = 400;
+const HTTP_OK_STATUS = 200;
 
 const getTalkerUsers = async () => {
   const response = await readFile(usersDb, 'utf8');
   return JSON.parse(response);
+};
+
+const getUsersByName = async (req, res) => {
+  const { q } = req.query;
+  const users = await getTalkerUsers();
+
+  const userName = users.filter((talker) => talker.name.includes(q));
+
+  if (!userName) {
+    return res.status(HTTP_OK_STATUS).json(users);
+  }
+
+  return userName;
 };
 
 const updateTalkerUsers = async (id, body) => {
@@ -47,7 +61,7 @@ const deleteUser = async (id) => {
 
   const newDb = JSON.stringify(removedIdUser, null, 2);
   await writeFile(usersDb, newDb);
-  
+
   return removedIdUser;
 };
 
@@ -147,6 +161,7 @@ const validateTalkerRate = (req, res, next) => {
 
 module.exports = {
   getTalkerUsers,
+  getUsersByName,
   updateTalkerUsers,
   addNewUser,
   deleteUser,

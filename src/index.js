@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {
   getTalkerUsers,
+  getUsersByName,
   updateTalkerUsers,
   addNewUser,
   deleteUser,
@@ -32,6 +33,12 @@ app.get('/talker', async (_req, res) => {
   const users = await getTalkerUsers();
   if (users.length === 0) return res.status(HTTP_OK_STATUS).json([]);
   return res.status(HTTP_OK_STATUS).json(users);
+});
+
+app.get('/talker/search', tokenValidation, async (req, res) => {
+  const user = await getUsersByName(req, res);
+
+  return res.status(HTTP_OK_STATUS).json(user);
 });
 
 app.get('/talker/:id', async (req, res) => {
