@@ -19,6 +19,7 @@ A aplicação [Node](https://nodejs.org/en/) está configurada para rodar dentro
 - [Express](https://expressjs.com/)
 - [API REST](https://blog.betrybe.com/desenvolvimento-web/api-rest-tudo-sobre/)
 - [Docker](https://www.docker.com/)
+- [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [Zoom](https://zoom.us/)
 - [Slack](https://slack.com/intl/pt-br/)
 - [VsCode](https://code.visualstudio.com/)
