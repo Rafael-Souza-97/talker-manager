@@ -1,6 +1,6 @@
 # Talker Manager Project
 
-Aplicação realizada enquanto aluno da [Trybe](https://www.betrybe.com/) para reforçar os conhecimentos sobre Node.js. O trabalho consiste em criar uma 
+Aplicação realizada enquanto aluno da [Trybe](https://www.betrybe.com/) para reforçar os conhecimentos sobre [Node.js](https://nodejs.org/en/). O trabalho consiste em criar uma 
 [API REST](https://blog.betrybe.com/desenvolvimento-web/api-rest-tudo-sobre/) utilizando o framework [Express](https://expressjs.com/) com 
 [C.R.U.D](https://blog.betrybe.com/tecnologia/crud-operacoes-basicas/)(Create, Read, Update and Delete). 
 A aplicação [Node](https://nodejs.org/en/) está configurada para rodar dentro de um container [Docker](https://www.docker.com/).
