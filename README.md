@@ -2,6 +2,41 @@
 
 Aplicação realizada enquanto aluno da [Trybe](https://www.betrybe.com/) para reforçar os conhecimentos sobre [Node.js](https://nodejs.org/en/) e criação de [API REST](https://blog.betrybe.com/desenvolvimento-web/api-rest-tudo-sobre/). O trabalho consiste em criar uma API para que o usuário possa gerenciar palestrantes através de um banco de dados, utilizando o framework [Express](https://expressjs.com/) com [C.R.U.D](https://blog.betrybe.com/tecnologia/crud-operacoes-basicas/)(Create, Read, Update and Delete). A aplicação [Node](https://nodejs.org/en/) está configurada para rodar dentro de um container [Docker](https://www.docker.com/).
 
+<br>
+
+## Rodando a aplicação via Docker
+
+- Clone o repositório
+
+```bash
+git clone git@github.com:Rafael-Souza-97/talker-manager.git
+```
+
+- Rode o serviço `node` com o comando `docker-compose up -d`.
+
+ > - Esse serviço irá inicializar um container chamado `talker_manager`.
+ > - A partir daqui você pode rodar o container via CLI ou abri-lo no VS Code.
+  
+```bash
+docker-compose up -d
+```
+
+- Use o comando `docker exec -it talker_manager bash`.
+
+```bash
+docker exec -it talker_manager bash
+```
+
+- Instale as depëndencias, caso necessário, com 'npm install' (dentro do bash do container).
+
+```bash
+npm install
+```
+
+  > Execute a aplicação com `npm start` ou `npm run dev`
+ 
+ <br>
+
 ## Autor
 
 - [Rafael Souza](https://github.com/Rafael-Souza-97)
